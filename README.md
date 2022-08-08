@@ -7,6 +7,8 @@ For run this application on your machine.
 
 # Backend:
 2. cd crudbackend
+    1. pip install -r requirements.txt
+    2. uvicorn main:app --host 127.0.0.1 --port 8000 --reload
     
 # Frontend:
 3. cd crudfrontend
