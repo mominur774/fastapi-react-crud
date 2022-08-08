@@ -1,11 +1,14 @@
 import '../styles/globals.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import Layout from '../components/Layout/Layout'
+import Layout from '../components/Layout/Layout';
+import { ToastProvider } from 'react-toast-notifications';
 
 function MyApp({ Component, pageProps }) {
   return (
     <Layout>
-      <Component {...pageProps} />
+      <ToastProvider>
+        <Component {...pageProps} />
+      </ToastProvider>
     </Layout>
   )
 }

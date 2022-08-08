@@ -1,10 +1,14 @@
-import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import useApiHelper from '../../api';
+import Link from 'next/link';
+import { useToasts } from 'react-toast-notifications';
 
 const EditStudent = (props) => {
     const api = useApiHelper();
     const router = useRouter();
+    const { addToast } = useToasts();
+
     const [student, setStudent] = useState({});
 
     const handleChange = e => {
@@ -18,6 +22,7 @@ const EditStudent = (props) => {
         e.preventDefault();
         api.updateStudent(props.id, student).then(res => {
             router.push('/')
+            addToast("Student updated successfully!", { appearance: 'success' })
         }).catch(error => {
             console.log(error)
         })
@@ -55,6 +60,7 @@ const EditStudent = (props) => {
                     </div>
                     <div className="form-group mb-3">
                         <button type="submit" className='btn btn-primary w-100 my-3'>Update</button>
+                        <Link href="/">Cancel</Link>
                     </div>
                 </form>
             </div>

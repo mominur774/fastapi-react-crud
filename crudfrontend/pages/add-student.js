@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import useApiHelper from '../api';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { useToasts } from 'react-toast-notifications';
 
 const AddStudent = () => {
     const [formData, setFormData] = useState({});
     const api = useApiHelper();
     const router = useRouter();
+    const { addToast } = useToasts();
 
     const handleChange = e => {
         setFormData({
@@ -18,6 +21,7 @@ const AddStudent = () => {
         e.preventDefault();
         api.addStudent(formData).then(res => {
             router.push('/')
+            addToast("Student added successfully!", { appearance: 'success' })
         }).catch(error => {
             console.log(error)
         })
@@ -42,6 +46,7 @@ const AddStudent = () => {
                     </div>
                     <div className="form-group mb-3">
                         <button type="submit" className='btn btn-primary w-100 my-3'>Add</button>
+                        <Link href="/">Cancel</Link>
                     </div>
                 </form>
             </div>
