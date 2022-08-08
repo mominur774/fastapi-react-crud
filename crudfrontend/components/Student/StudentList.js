@@ -3,9 +3,11 @@ import useApiHelper from '../../api';
 import Link from 'next/link';
 import { BiEdit } from 'react-icons/bi';
 import { FaTrash } from 'react-icons/fa';
+import { useToasts } from 'react-toast-notifications';
 
 const StudentList = () => {
     const api = useApiHelper();
+    const { addToast } = useToasts();
     const [students, setStudents] = useState([]);
 
     const studentList = () => {
@@ -17,6 +19,7 @@ const StudentList = () => {
     const deleteStudent = id => {
         api.deleteStudent(id).then(res => {
             studentList();
+            addToast("Student deleted successfully!", { appearance: 'warning' })
         }).catch(error => {
             console.log(error)
         })
